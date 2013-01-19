@@ -15,6 +15,7 @@ end
 gem 'jquery-rails'
 gem 'formtastic'
 gem 'haml'
+gem 'httparty'
 
 group :test, :development do
   gem 'pry'

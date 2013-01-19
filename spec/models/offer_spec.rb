@@ -16,7 +16,7 @@ describe Offer do
 
   subject { Offer.new(params) }
 
-  describe "#new" do
+  describe ".new" do
     its(:title)     { should == title }
     its(:payout)    { should == payout }
     its(:thumbnail) { should == thumbnail }

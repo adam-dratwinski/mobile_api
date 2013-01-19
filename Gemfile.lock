@@ -95,6 +95,9 @@ GEM
       spork (>= 0.8.4)
     haml (3.1.7)
     hike (1.2.1)
+    httparty (0.10.0)
+      multi_json (~> 1.0)
+      multi_xml
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.2.0)
@@ -114,6 +117,7 @@ GEM
     method_source (0.8.1)
     mime-types (1.19)
     multi_json (1.5.0)
+    multi_xml (0.5.2)
     nokogiri (1.5.6)
     polyglot (0.3.3)
     pry (0.9.11.3)
@@ -218,6 +222,7 @@ DEPENDENCIES
   guard-rspec
   guard-spork
   haml
+  httparty
   jquery-rails
   pry
   rails (= 3.2.10)
