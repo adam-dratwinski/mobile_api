@@ -27,6 +27,8 @@ group :test do
   gem 'database_cleaner'
   gem 'vcr'
   gem 'capybara'
+  gem 'webmock'
+  gem 'timecop'
 end
 
 group :development do

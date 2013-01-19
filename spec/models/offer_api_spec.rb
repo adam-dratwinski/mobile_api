@@ -39,9 +39,9 @@ describe OfferApi do
 
   describe ".generate_api_url" do
     it "generates proper api url" do
-      Time.stub(:now => "2012-01-01 00:00:00")
+      Timecop.freeze("2013-01-19 22:50")
 
-      OfferApi.generate_api_url(data, api_key).should == "http://api.sponsorpay.com/feed/v1/offers.json?appid=157&uid=player1&ip=212.45.111.17&locale=de&device_id=2b6f0cc904d137be2e1730235f5664094b831186&ps_time=1312211903&pub0=campaign2&page=2&timestamp=2012&hashkey=6bee3edf87206e0af62f13ded86c3d129d01c39b"
+      OfferApi.generate_api_url(data, api_key).should == "http://api.sponsorpay.com/feed/v1/offers.json?appid=157&uid=player1&ip=212.45.111.17&locale=de&device_id=2b6f0cc904d137be2e1730235f5664094b831186&ps_time=1312211903&pub0=campaign2&page=2&timestamp=1358635800&hashkey=27bf62140fcf329f807ad635bfc800d266c18892"
     end
   end
 
@@ -56,9 +56,13 @@ describe OfferApi do
 
   describe ".load" do
     it "creates request" do
-      response = OfferApi.load( :uid => "player1", :pub0 => "campaign2", :page => 2)
-      response["code"].should == "OK"
-      response["message"].should == "Ok"
+      Timecop.freeze("2013-01-19 22:50")
+
+      VCR.use_cassette('offer_api') do
+        response = OfferApi.load( :uid => "player1", :pub0 => "campaign2", :page => 2)
+        response["code"].should == "OK"
+        response["message"].should == "Ok"
+      end
     end
   end
 end

@@ -36,3 +36,11 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'spec/fixtures/cassettes'
+  c.hook_into :webmock 
+  c.filter_sensitive_data("<OFFER_API_KEY>") do
+    OfferApi.config[:api_key]
+  end
+end
