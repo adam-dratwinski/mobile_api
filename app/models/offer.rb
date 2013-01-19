@@ -8,14 +8,7 @@ class Offer
   end
 
   def self.find(params)
-    offer_params = {
-      :title     => "Offer Title",
-      :payout    => "Offer Payout",
-      :thumbnail => "Offer Thumbnail"
-    }
-
-    offers = []
-    offers << Offer.new(offer_params) if params[:user]
-    offers
+    offers = OfferApi.load(params)
+    offers.map { |offer| Offer.new(offer) }
   end
 end
