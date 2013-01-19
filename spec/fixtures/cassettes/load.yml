@@ -15,7 +15,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 19 Jan 2013 22:51:47 GMT
+      - Sat, 19 Jan 2013 23:30:22 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -43,7 +43,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       X-Runtime:
-      - '0.197739'
+      - '0.026379'
     body:
       encoding: ASCII-8BIT
       string: !binary |-

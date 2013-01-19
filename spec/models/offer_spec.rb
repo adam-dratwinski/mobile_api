@@ -23,7 +23,7 @@ describe Offer do
   end
 
   it "finds offers" do
-    OfferApi.should_receive(:load).with(params).and_return([params])
+    OfferApi.should_receive(:load_offers).with(params).and_return([params])
 
     offer = Offer.find(params)[0]
 

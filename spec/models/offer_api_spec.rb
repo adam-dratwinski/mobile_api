@@ -1,11 +1,6 @@
 require "spec_helper" 
 
 describe OfferApi do
-  let(:user_id)	    { stub(:user_id) }
-  let(:timestamp)   { stub(:timestamp) }
-  let(:pub0)	    { stub(:pub0) }
-  let(:page)	    { stub(:pate) }
-
   let(:data) { {
     :appid     => '157',
     :uid       => 'player1',
@@ -28,8 +23,6 @@ describe OfferApi do
   } }
 
   let(:api_key) { "e95a21621a1865bcbae3bee89c4d4f84" }
-
-  subject { OfferApi.new }
 
   describe ".generate_hash" do
     it "generates proper hash" do
@@ -58,11 +51,26 @@ describe OfferApi do
     it "creates request" do
       Timecop.freeze("2013-01-19 22:50")
 
-      VCR.use_cassette('offer_api') do
+      VCR.use_cassette('load') do
         response = OfferApi.load( :uid => "player1", :pub0 => "campaign2", :page => 2)
         response["code"].should == "OK"
         response["message"].should == "Ok"
       end
+    end
+  end
+
+  describe ".offers" do
+    Timecop.freeze("2013-01-19 22:50")
+
+    VCR.use_cassette('load_offers') do
+      offers = OfferApi.load_offers( :uid => "player1", :pub0 => "campaign2", :page => 2)
+
+      offers[0][:title].should  == "o2 Gratis Prepaid-Karte mit Bonus" 
+      offers[0][:payout].should == 54085 
+      offers[0][:thumbnail].should == {
+        "lowres"=> "http://cdn3.sponsorpay.com/assets/15196/offerwall-02_square_60.jpg",
+        "hires"=> "http://cdn3.sponsorpay.com/assets/15196/offerwall-02_square_175.jpg"
+      }
     end
   end
 end

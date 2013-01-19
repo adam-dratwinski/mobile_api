@@ -29,4 +29,8 @@ class OfferApi
     params = config.merge(params)
     HTTParty.get OfferApi.generate_api_url(params, config[:api_key])
   end
+
+  def self.load_offers params
+    OfferApi.load(params)["offers"].map(&:symbolize_keys)
+  end
 end
