@@ -1,0 +1,17 @@
+.wrapper {
+  width: 970px;
+  margin: 30px auto;
+  padding: 15px;
+  border: 1px solid #999;
+
+  @include box-shadow(0 0 5px 0 rgba(0,0,0,0.3));
+  @include border-top-radius(5px);
+  @include border-bottom-radius(5px);
+  @include linear-gradient(#fff, #f0f0f0);
+
+  h1 {
+    margin: 0 0 15px 0
+  }
+}
+
+

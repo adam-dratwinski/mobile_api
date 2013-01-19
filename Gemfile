@@ -9,6 +9,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
+  gem 'bourbon'
 end
 
 gem 'jquery-rails'
@@ -30,6 +31,7 @@ group :development do
   gem 'guard-spork'
   gem 'guard-cucumber'
   gem 'guard-rspec'
+  gem 'guard-livereload'
 
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false
