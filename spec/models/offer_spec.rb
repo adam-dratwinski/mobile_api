@@ -31,4 +31,10 @@ describe Offer do
     offer.payout.should    == payout
     offer.thumbnail.should == thumbnail
   end
+
+  it "doesn't try to find offers if no params send" do
+    OfferApi.should_not_receive(:load_offers)
+
+    Offer.find({}).should == []
+  end
 end
