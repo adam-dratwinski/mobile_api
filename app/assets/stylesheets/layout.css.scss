@@ -14,4 +14,15 @@
   }
 }
 
-
+.formtastic {
+  width: 600px;
+  fieldset.inputs {
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 15px;
+    legend {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+}
