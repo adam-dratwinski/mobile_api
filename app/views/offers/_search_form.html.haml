@@ -1,7 +1,7 @@
-= semantic_form_for :user do |f|
+= semantic_form_for :user, :url => offers_path, :method => :get do |f|
   = f.inputs :name => "Form options" do
     = f.input :uid
     = f.input :pub0
     = f.input :page
     = f.actions do
-      = f.action :submit 
+      = f.action :submit, :label => "Submit"

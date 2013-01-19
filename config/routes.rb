@@ -1,7 +1,7 @@
 MobileApi::Application.routes.draw do
-  root :to => 'offers#index'
+  resources :offers
 
-  resource :offers
+  root :to => 'offers#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

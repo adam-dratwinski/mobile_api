@@ -1,2 +1,8 @@
 #search_form_section.section
   = render "search_form"
+#offers_section.section
+  - @offers.each do |offer|
+    = render "offer", :offer => offer
+  - if @offers.empty? 
+    .no_offers 
+      No offers
