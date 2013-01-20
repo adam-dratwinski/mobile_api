@@ -6,10 +6,4 @@ class Offer
     @payout    = params[:payout]
     @thumbnail = params[:thumbnail]
   end
-
-  def self.find(params)
-    return [] if params.empty?
-    offers = OfferApi.load_offers(params)
-    offers.map { |offer| Offer.new(offer) }
-  end
 end

@@ -9,7 +9,7 @@ describe OffersController, 'index' do
   end
 
   it "has offers array when params send" do
-    Offer.should_receive(:find).with(:uid => "player1", :pub0 => "campaign2", :page => "2").and_return([offer])
+    OfferApi.should_receive(:load_offers).with(:uid => "player1", :pub0 => "campaign2", :page => "2").and_return([offer])
 
     get :index, :offer => { :uid => "player1", :pub0 => "campaign2", :page => 2 }
     assigns[:offers].should have(1).offer

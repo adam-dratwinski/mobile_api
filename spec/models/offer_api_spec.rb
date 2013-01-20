@@ -59,18 +59,50 @@ describe OfferApi do
     end
   end
 
-  describe ".offers" do
-    Timecop.freeze("2013-01-19 22:50")
+  describe ".load_offers" do
+    context "when some params passed" do
+      let(:params) { { :uid => "player1", :pub0 => "campaign2", :page => 2 } }
 
-    VCR.use_cassette('load_offers') do
-      offers = OfferApi.load_offers( :uid => "player1", :pub0 => "campaign2", :page => 2)
+      before do
+        Timecop.freeze("2013-01-19 22:50")
 
-      offers[0][:title].should  == "o2 Gratis Prepaid-Karte mit Bonus" 
-      offers[0][:payout].should == 54085 
-      offers[0][:thumbnail].should == {
-        "lowres"=> "http://cdn3.sponsorpay.com/assets/15196/offerwall-02_square_60.jpg",
-        "hires"=> "http://cdn3.sponsorpay.com/assets/15196/offerwall-02_square_175.jpg"
-      }
+        VCR.use_cassette('load_offers') do
+          @offers = OfferApi.load_offers(params)
+          @first_offer = @offers[0]
+        end
+      end
+
+      it "has offers" do
+        @offers.should have(17).offers
+      end
+        
+      it "has a title" do
+        @first_offer.title.should == "o2 Gratis Prepaid-Karte mit Bonus" 
+      end
+
+      it "has a payout number" do
+        @first_offer.payout.should == 54085 
+      end
+
+      it "has a thumbnail" do
+        @first_offer.thumbnail.should  == {
+          "lowres"=> "http://cdn3.sponsorpay.com/assets/15196/offerwall-02_square_60.jpg",
+          "hires"=> "http://cdn3.sponsorpay.com/assets/15196/offerwall-02_square_175.jpg"
+        }
+      end
+    end
+
+    context "when no params passed" do
+      let(:params) { {} }
+
+      it "should not receive load" do
+        OfferApi.should_not_receive(:load)
+        OfferApi.load_offers(params)
+      end
+
+      it "should return an empty array" do
+        OfferApi.load_offers(params).should == []
+      end
     end
   end
 end

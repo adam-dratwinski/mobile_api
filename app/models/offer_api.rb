@@ -30,7 +30,10 @@ class OfferApi
     HTTParty.get OfferApi.generate_api_url(params, config[:api_key])
   end
 
-  def self.load_offers params
-    OfferApi.load(params)["offers"].map(&:symbolize_keys)
+  def self.load_offers params = {}
+    return [] if params.empty?
+    OfferApi.load(params)["offers"].map(&:symbolize_keys).map do |offer|
+      Offer.new(offer)
+    end
   end
 end

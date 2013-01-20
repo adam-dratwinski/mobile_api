@@ -1,5 +1,5 @@
 class OffersController < ApplicationController
   def index
-    @offers = Offer.find((params[:offer] || {}).symbolize_keys)
+    @offers = OfferApi.load_offers((params[:offer] || {}).symbolize_keys)
   end
 end
