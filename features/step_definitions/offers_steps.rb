@@ -17,3 +17,7 @@ end
 Then /^I should see "(.*?)" within "(.*?)"$/ do |text, selector|
   page.should have_selector(selector, :text => /#{text}/i)
 end
+
+When /^today is "(.*?)"$/ do |arg1|
+  Timecop.freeze(arg1)
+end

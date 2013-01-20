@@ -57,3 +57,14 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+VCR.configure do |c|
+  c.cassette_library_dir = 'features/fixtures/cassettes'
+  c.hook_into :webmock 
+  c.filter_sensitive_data("<OFFER_API_KEY>") do
+    OfferApi.config[:api_key]
+  end
+end
+
+VCR.cucumber_tags do |t|
+  t.tag  '@vcr' # uses default record mode since no options are given
+end
