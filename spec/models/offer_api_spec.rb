@@ -17,21 +17,21 @@ describe OfferApi do
       end
 
       it "has offers" do
-        @offers.should have(16).offers
+        @offers.should have(19).offers
       end
         
       it "has a title" do
-        @first_offer.title.should == "Do it yourself Gewinnspiel" 
+        @first_offer.title.should == "Modern War" 
       end
 
       it "has a payout number" do
-        @first_offer.payout.should == 9014
+        @first_offer.payout.should == 2373
       end
 
       it "has a thumbnail" do
         @first_offer.thumbnail.should  == {
-          "lowres" => "http://cdn3.sponsorpay.com/assets/175/win_icon_square_60.png",
-          "hires"  => "http://cdn3.sponsorpay.com/assets/175/win_icon_square_175.png"
+          "lowres" =>"http://cdn2.sponsorpay.com/assets/17744/icon_mobile_square_60.png",
+          "hires"  =>"http://cdn2.sponsorpay.com/assets/17744/icon_mobile_square_175.png"
         }
       end
     end

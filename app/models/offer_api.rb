@@ -1,7 +1,7 @@
 require 'digest/sha1'
 
 class OfferApi
-  def initialize(params)
+  def initialize(params = {})
     @params         = params
     @request_params = params.reverse_merge(OfferApi.config)
     @request_params.delete :api_key
@@ -9,7 +9,6 @@ class OfferApi
 
   def load_offers
     return [] if @params.empty?
-
     request["offers"].map(&:symbolize_keys).map do |offer|
       Offer.new(offer)
     end
