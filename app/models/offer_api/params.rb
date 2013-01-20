@@ -1,6 +1,6 @@
 class OfferApi
   class Params
-    def initialize(params, api_key)
+    def initialize params, api_key
       @params  = params.reverse_merge :timestamp => Time.now.to_i
       @api_key = api_key
     end
@@ -22,7 +22,7 @@ class OfferApi
 
     private
 
-    def convert_array_to_string(params)
+    def convert_array_to_string params
       params = params.map { |pair| "#{pair[0]}=#{pair[1]}" }
 
       params.join("&")
