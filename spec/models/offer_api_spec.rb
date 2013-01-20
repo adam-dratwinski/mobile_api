@@ -1,6 +1,8 @@
 require "spec_helper" 
 
 describe OfferApi do
+  before { Timecop.freeze("2013-01-19 22:50") }
+
   let(:params) { { :uid => "player1", :pub0 => "campaign2", :page => 2 } }
 
   subject { OfferApi.new(params) }
@@ -8,8 +10,6 @@ describe OfferApi do
   describe "#load_offers" do
     context "when some params passed" do
       before do
-        Timecop.freeze("2013-01-19 22:50")
-
         VCR.use_cassette('load_offers') do
           @offers = subject.load_offers
           @first_offer = @offers[0]
@@ -67,6 +67,14 @@ describe OfferApi do
       instance.should_receive(:load_offers)
 
       OfferApi.load_offers(params)
+    end
+  end
+
+  it "should validate response" do
+    subject.stub(:check_response => false)
+
+    VCR.use_cassette('load_offers') do
+      expect { subject.load_offers }.to raise_error(OfferApi::BadSignatureException)
     end
   end
 end

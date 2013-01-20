@@ -1,5 +1,3 @@
-require 'digest/sha1'
-
 class OfferApi
   def initialize(params = {})
     @params         = params
@@ -26,10 +24,24 @@ class OfferApi
   private
 
   def request
-    HTTParty.get(request_url)
+    response = HTTParty.get(request_url)
+    validate(response)
+    response
+  end
+
+  def validate(response)
+    unless check_response(response)
+      raise OfferApi::BadSignatureException
+    end
+  end
+
+  def check_response(response)
+    response.headers["x-sponsorpay-response-signature"] == Digest::SHA1.hexdigest(response.body + OfferApi.config[:api_key])
   end
 
   def request_url
     OfferApi::Params.new(@request_params, OfferApi.config[:api_key]).generate_api_url
   end
+
+  class BadSignatureException < Exception; end
 end
