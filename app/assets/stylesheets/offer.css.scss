@@ -1,0 +1,22 @@
+#offers_section {
+  .offer {
+    width: 210px;
+    height: 230px;
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid #999;
+    padding: 5px;
+    margin: 8px;
+    text-align: center;
+
+    @include linear-gradient(#fff, #f0f0f0);
+    @include box-shadow(0 0 5px 0 rgba(0,0,0,0.3));
+    @include border-top-radius(5px);
+    @include border-bottom-radius(5px);
+
+    .offer-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+}
